@@ -1,24 +1,9 @@
 # README
+# [Service Sat BlackList](https://github.com/vts-group/sat-lista-negra)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a service/REST API  to know if some tax id  belongs to blacklist 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Resource URI
+```bash
+curl -X GET {host}/v1/list/{tax reference}
+```
