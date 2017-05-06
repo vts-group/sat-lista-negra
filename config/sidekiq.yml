@@ -1,0 +1,4 @@
+sat_worker:
+  every: 1d
+  class: SatJob
+  queue: sat
