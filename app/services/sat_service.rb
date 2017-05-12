@@ -3,106 +3,63 @@ class SatService
   SAT_URL = "https://siat.sat.gob.mx/PTSC/consultapdc/articulo69"
 
   def get_lista_negra
-    get_lista_negra_ley_transparencia
-    get_lista_negra_consulta_global
-    get_lista_retornoinv
-    get_lista_gral_no_localizados
-    get_lista_elim_excreg13
-    get_lista_elim_aclarcont
-    get_lista_elim_rectordverif
-    get_lista_presuntos
-    get_lista_definitivos
-    get_desvirtuaron
-  end
-
-  def get_lista_negra_ley_transparencia
-    list_type =  "Personas Físicas y Morales- Créditos cancelados, condonados y condonados por retorno de inversiones"
-    url = SAT_URL + "/ley_transparencia/fis_mor/efed/TODAS"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
+    sat_urls.each do | array_url |
+      url = SAT_URL + array_url[0]
+      ('A'..'Z').each do |letter|
+        clean_list(letter,array_url[1])
+        get_pdf(url,letter,array_url[1])
+      end
     end
   end
 
-  def get_lista_negra_consulta_global
-    list_type =  "Personas Físicas y Morales- Consulta Global"
-    url = SAT_URL + "/inc_fm_todos/fis_mor/efed/TODAS"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
+  def sat_urls
+    [
+      [
+        "/ley_transparencia/fis_mor/efed/TODAS",
+        "Personas Físicas y Morales- Créditos cancelados, condonados y condonados por retorno de inversiones"
+      ],
+      [
+        "/inc_fm_todos/fis_mor/efed/TODAS",
+        "Personas Físicas y Morales- Consulta Global"
+      ],
+      [
+        "/retornoinv",
+        "Consulta Global Condonados Retorno de Inversiones"
+      ],
+      [
+        "/gral_no_localizados/fis_mor/efed/TODAS",
+        "Personas Físicas y Morales- Consulta Global No localizados"
+      ],
+      [
+        "/elim/excreg13",
+        "Excluidos de conformidad con la regla I.1.3 de la Resolución Miscelánea Fiscal vigente"
+      ],
+      [
+        "/elim/aclarcont",
+        "Aclaraciones presentadas por contribuyentes"
+      ],
+      [
+        "/elim/rectordverif",
+        "Confirmación de datos en la orden de verificación"
+      ],
+      [
+        "/presuntos/fis_mor/TODAS",
+        "presuntos/fis_mor/TODAS"
+      ],
+      [
+        "/definitivos/fis_mor/TODAS",
+        "definitivos/fis_mor/TODAS"
+      ],
+      [
+        "/desvirtuaron/fis_mor/TODAS",
+        "/desvirtuaron/fis_mor/TODAS"
+      ],
+      [
+        "/int_con",
+        "Consulta Global"
+      ],
 
-  def get_lista_retornoinv
-    list_type =  "retornoinv"
-    url = SAT_URL + "/retornoinv"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
-
-  def get_lista_gral_no_localizados
-    list_type =  "gral_no_localizados/fis_mor/efed/TODAS"
-    url = SAT_URL + "/gral_no_localizados/fis_mor/efed/TODAS"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
-
-  def get_lista_elim_excreg13
-    list_type =  "elim/excreg13"
-    url = SAT_URL + "/elim/excreg13"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
-
-  def get_lista_elim_aclarcont
-    list_type =  "elim/aclarcont"
-    url = SAT_URL + "/elim/aclarcont"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
-
-  def get_lista_elim_rectordverif
-    list_type =  "elim/rectordverif"
-    url = SAT_URL + "/elim/rectordverif"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
-
-  def get_lista_presuntos
-    list_type =  "presuntos/fis_mor/TODAS"
-    url = SAT_URL + "/presuntos/fis_mor/TODAS"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
-
-  def get_lista_definitivos
-    list_type =  "definitivos/fis_mor/TODAS"
-    url = SAT_URL + "/definitivos/fis_mor/TODAS"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
-  end
-
-  def get_desvirtuaron
-    list_type =  "desvirtuaron/fis_mor/TODAS"
-    url = SAT_URL + "/desvirtuaron/fis_mor/TODAS"
-    ('A'..'Z').each do |letter|
-      clean_list(letter,list_type)
-      get_pdf(url,letter,list_type)
-    end
+    ]
   end
 
   def get_pdf(url,letter,list_type)
