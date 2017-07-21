@@ -1,3 +1,4 @@
+require 'net/http'
 class SatService
 
   SAT_URL = "https://siat.sat.gob.mx/PTSC/consultapdc/articulo69"
