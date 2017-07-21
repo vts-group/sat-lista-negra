@@ -11,7 +11,7 @@ default: &default
   username: <%= ENV.fetch("POSTGRES_USER") { postgres } %>
   timeout: 5000
   password: <%= ENV.fetch("POSTGRES_PASSWORD") { satlistanegra } %>
-  host: postgres
+  host: <%= ENV.fetch("POSTGRES_HOST") { postgres } %>
   database: <%= ENV.fetch("POSTGRES_DATABASE") { sat_lista_negra } %>
 
 development:
